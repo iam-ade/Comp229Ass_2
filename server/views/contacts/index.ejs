@@ -1,0 +1,68 @@
+<%- include('../partials/header.ejs'); %>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+          <h3>Business Contact List </h3>
+          <!-- ------------------------ -->
+          <!-- FIX THE ADD BUTTON BELOW -->
+          <!-- ------------------------ -->
+          <% if(typeof displayName == 'string' && displayName) { %>
+          <a href="/contacts/details" class="btn btn-primary">
+            <i class="fa fa-plus"></i> Add contact</a>
+          <% } %>
+          <br>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">Contact Name</th>
+                  <th class="text-center">Contact Number</th>
+                  <th class="text-center">Email Address</th>
+                  <% if(typeof displayName == 'string' && displayName) { %>
+                    <th class="text-center">Edit</th>
+                    <th class="text-center">Delete</th>
+                  <% } %>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Template Row -->
+                <% for (let count = 0; count < Contacts.length; count++) { %>
+                <tr>
+                  <td class="text-center"><%= Contacts[count].name %></td>
+                  <td class="text-center"><%= Contacts[count].number %></td>
+                  <td class="text-center"><%= Contacts[count].email %></td>
+
+                  <% if(typeof displayName == 'string' && displayName) { %>
+                    <td class="text-center">
+                      <!-- ------------------------ -->
+                      <!-- ADD the EDIT BUTTON HERE -->
+                      <!-- ------------------------ -->
+                      <a href="/contacts/edit/<%= Contacts[count]._id %>" class="btn btn-primary btn-sm">
+                        <i class="fas fa-pencil-alt"></i>Edit</a>
+                    </td>
+
+                    <td class="text-center">
+                      <!-- ------------------------ -->
+                      <!-- ADD the DELETE BUTTON HERE -->
+                      <!-- ------------------------ -->
+                      <a href="/contacts/delete/<%= Contacts[count]._id %>" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash-alt"></i> Delete</a>
+                    </td>
+                  <% } %>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+           <div class="col-md-offset-1 col-md-10 text-center">
+            <ul class="pagination pagination-lg pager" id="myPager"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<%- include('../partials/footer.ejs'); %>
+
+
